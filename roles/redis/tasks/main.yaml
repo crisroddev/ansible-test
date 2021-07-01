@@ -1,0 +1,31 @@
+---
+- name: "Pull Redis image "
+  docker_image:
+    name: 'redis'
+    tag:  'latest'
+
+- name: Data Container
+  community.docker.docker_container:
+    name: redis-data
+    image: busybox
+    state: started
+    volumes:
+      - /data/redis
+
+- name: Redis Container
+  community.docker.docker_container:
+    name: redis-container
+    image: redis
+    state: started
+    command: redis-server --requirepass "{{ redis_password }}"
+    ports: 
+      - "6379:6379"
+    tty: true
+    detach: 
+    volumes_from:
+      - redis-data
+
+- name: Task Redis Finished
+  debug:
+    msg: Task Redis Finished
+...

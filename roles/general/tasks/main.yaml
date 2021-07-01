@@ -1,0 +1,16 @@
+---
+  - name: Update Apt Cache
+    apt: update_cache=yes
+  
+  - name: Install pip
+    apt:
+      name: python-pip
+      update_cache: yes
+      state: present
+
+  - name: Install Docker-Py
+    pip:
+      name: docker-py
+      executable: pip
+      state: latest
+...

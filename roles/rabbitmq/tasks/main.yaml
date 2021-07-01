@@ -1,0 +1,26 @@
+---
+- name: "Pull RabbitMQ image "
+  docker_image:
+    name: 'rabbitmq:3-management-alpine'
+
+- name: RabbitMQ
+  community.docker.docker_container:
+    name: rabbit-mq-container
+    image: rabbitmq:3-management-alpine
+    state: started
+    ports: 
+      - "5672:5672"
+      - "15672:15672"
+    tty: true
+    detach: 
+    volumes:
+      - "/rabbitmq/data/:/var/lib/rabbitmq/"
+      - "/rabbitmq/log/:/var/log/rabbitmq"
+    env:
+      RABBITMQ_DEFAULT_USER: "{{ rabbitmq_default_user }}"
+      RABBITMQ_DEFAULT_PASS: "{{ rabbitmq_default_pass }}"
+
+- name: Task RabbitMQ Finished
+  debug:
+    msg: Task RabbitMQ Finished
+...

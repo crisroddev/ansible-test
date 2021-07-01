@@ -1,0 +1,12 @@
+server_hostname: web01
+redis_password: root
+rabbitmq_default_user: rabbitmq
+rabbitmq_default_pass: rabbitmq
+db_volume: db-data:/var/lib/mysql
+mysql_root_password: password
+mysql_database: xcelirate
+mysql_user: user
+mysql_password: xcelirate
+replication_user: replication_user
+replication_password: replication_password
+
